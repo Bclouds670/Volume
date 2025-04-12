@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod
+   labels:
+     app: mylabel
+spec:
+  imagePullSecrets:
+   - name: mydockersecret
+  containers:
+   - name: mycontainer
+     image: ec2raj/rnginx
+     ports:
+       - containerPort: 80

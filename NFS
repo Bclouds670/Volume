@@ -23,10 +23,10 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - mountPath: /usr/share/nginx/html  # Ensure this is the correct path where you want to mount the NFS volume
-              name: royalvolume
+            - mountPath: /usr/share/nginx/html
+              name: yourvolume
       volumes:
-        - name: royalvolume
-          nfs:
-            path: /win  # Make sure this path exists and is accessible on the NFS server
-            server: fs-052af7e6e010bf834.efs.ap-south-1.amazonaws.com
+          - name: yourvolume
+            nfs:
+              path: /mydata
+              server: fs-0bde62f14f2d3464a.efs.ap-south-1.amazonaws.com

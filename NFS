@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxwala
+  labels:
+    app: mylabel
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mylabel
+
+  template:
+    metadata:
+      labels:
+        app: mylabel
+
+    spec:
+      containers:
+        - name: mycontainer
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html  # Ensure this is the correct path where you want to mount the NFS volume
+              name: royalvolume
+      volumes:
+        - name: royalvolume
+          nfs:
+            path: /win  # Make sure this path exists and is accessible on the NFS server
+            server: fs-052af7e6e010bf834.efs.ap-south-1.amazonaws.com
